@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <title>Ruirui Todo</title>        
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  </head>
+
+  <body>
+
+    <body data-ng-app="">
+        
+        <div class="container" data-ng-controller="TodoController">
+	
+            <header class="header">	
+                <h1>{{ appTitle }}</h1>
+            </header>
+
+	
+        <section class="app-body">
+            
+            <form data-ng-submit="addTodo()" class="todo-form">
+                <input type="text" data-ng-model="todoText" placeholder="What needs to be done?" />
+              
+                <input type="submit" value="Add" id='submit' class="btn btn-info"/>
+            </form>
+            
+            <section class="itemleft">
+			     
+                <span>{{ remaining() }} 
+                    
+                    <ng-pluralize count="remaining()" when="{ one: 'item left', other: 'items left'}"></ng-pluralize>    
+                
+                </span>
+                
+            </section>
+
+            <ul id="todo-list">
+                <li data-ng-repeat="todo in todos | filter:statusFilter track by $index">
+                    <input type="checkbox" class= "toggle" data-ng-model="todo.done">
+                    <label class="done-{{ todo.done }}">{{ todo.text }}</label>
+                    <button class = "destroy" ng-click = "removeTodo(todo)"></button>
+                </li>
+            </ul>
+
+	
+            <p class="clear"> <a href="" data-ng-click="archive()">Clear Completed Items</a> </p>
+        </section>
+        </div>
+    
+        <script src='http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.1/angular.min.js'></script>
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+        <script src="js/index.js"></script>
+    
+  </body>
+</html>
